@@ -1,0 +1,21 @@
+version: "3"
+services:
+  xpressdb:
+    image: "postgres"
+    container_name: postgres-xpressdb-yadas
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: xpress
+      POSTGRES_USER: yadas
+      POSTGRES_PASSWORD: yadas
+  springbootapp:
+    container_name: springboot-postgres-yadas
+    image: springboot-postgres-yadas
+    build: ./
+    depends_on:
+      - xpressdb
+    ports:
+      - 7001:8080
+
+

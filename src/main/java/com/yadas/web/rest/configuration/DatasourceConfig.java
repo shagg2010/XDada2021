@@ -13,7 +13,7 @@ public class DatasourceConfig {
     public DataSource datasource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://localhost:5433/xpress")
+                .url("jdbc:postgresql://xpressdb:5432/xpress")
                 .username("yadas")
                 .password("yadas")
                 .build();
