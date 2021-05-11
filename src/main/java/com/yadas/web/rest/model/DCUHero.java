@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="dcu_heros")
-public class DCUHeroes {
+@Table(name="dcu_heroes")
+public class DCUHero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,11 @@ public class DCUHeroes {
 
     private String heroName;
 
-    public DCUHeroes() {
+    public DCUHero() {
+    }
+
+    public DCUHero(String heroName) {
+        this.heroName = heroName;
     }
 
     public long getId() {
@@ -35,7 +39,7 @@ public class DCUHeroes {
 
     @Override
     public String toString() {
-        return "DCU_HEROS{" +
+        return "DCUHero { " +
                 "id=" + id +
                 ", heroName='" + heroName + '\'' +
                 '}';

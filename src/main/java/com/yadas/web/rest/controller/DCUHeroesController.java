@@ -1,17 +1,13 @@
 package com.yadas.web.rest.controller;
 
-import com.yadas.web.rest.controller.exceptions.HeroNotFoundException;
-import com.yadas.web.rest.model.DCUHeroes;
-import com.yadas.web.rest.repository.DCUHeroesRepository;
+import com.yadas.web.rest.model.DCUHero;
 import com.yadas.web.rest.service.DCUHeroesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dcu")
@@ -22,23 +18,23 @@ public class DCUHeroesController {
 
     @GetMapping("/heroes")
     @ResponseStatus(HttpStatus.OK )
-    public List<DCUHeroes> getAllHeroes(){
+    public List<DCUHero> getAllHeroes(){
         return dcuHeroesService.listAllHeroes();
     }
 
     @GetMapping("/hero/{id}")
-    public DCUHeroes getById(@PathVariable("id") Long id){
+    public DCUHero getById(@PathVariable("id") Long id){
         return dcuHeroesService.getDCUHeroById(id);
     }
 
     @PostMapping("/hero")
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Your DCU Hero created successfully...")
-    public DCUHeroes createHero(@RequestBody DCUHeroes dcuHeroes) {
-        return dcuHeroesService.createDCUHero(dcuHeroes);
+    public DCUHero createHero(@RequestBody DCUHero dcuHero) {
+        return dcuHeroesService.createDCUHero(dcuHero);
     }
 
     @PostMapping(value = "/heroes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<DCUHeroes> createHeroesBatch(@RequestBody List<DCUHeroes> dcuHeroes) {
+    public @ResponseBody List<DCUHero> createHeroesBatch(@RequestBody List<DCUHero> dcuHeroes) {
         return dcuHeroesService.createDCUHeroes(dcuHeroes);
     }
 

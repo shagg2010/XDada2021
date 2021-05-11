@@ -1,8 +1,10 @@
 package com.yadas.web.rest.service;
 
 import com.yadas.web.rest.controller.exceptions.HeroNotFoundException;
-import com.yadas.web.rest.model.DCUHeroes;
+import com.yadas.web.rest.model.DCUHero;
 import com.yadas.web.rest.repository.DCUHeroesRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,28 +17,31 @@ import java.util.Optional;
 @Transactional
 public class DCUHeroesService {
 
+    private static final Logger logger = LoggerFactory.getLogger(DCUHeroesService.class);
+
     @Autowired
     DCUHeroesRepository dcuHeroesRepository;
 
-    public List<DCUHeroes> listAllHeroes() {
+    public List<DCUHero> listAllHeroes() {
         return dcuHeroesRepository.findAll();
     }
 
-    public DCUHeroes createDCUHero(DCUHeroes dcuHero) {
+    public DCUHero createDCUHero(DCUHero dcuHero) {
         return dcuHeroesRepository.save(dcuHero);
     }
 
-    public List<DCUHeroes> createDCUHeroes(List<DCUHeroes> dcuHeroes) {
-        List<DCUHeroes> list = new ArrayList<>();
-        for (DCUHeroes dcuHero: dcuHeroes) {
+    public List<DCUHero> createDCUHeroes(List<DCUHero> dcuHeroes) {
+        List<DCUHero> list = new ArrayList<>();
+        for (DCUHero dcuHero: dcuHeroes) {
             list.add(dcuHeroesRepository.save(dcuHero));
         }
         return list;
     }
 
-    public DCUHeroes getDCUHeroById(Long id) {
-        Optional<DCUHeroes> dcuHero = dcuHeroesRepository.findById(id);
+    public DCUHero getDCUHeroById(Long id) {
+        Optional<DCUHero> dcuHero = dcuHeroesRepository.findById(id);
         if(!dcuHero.isPresent()){
+            logger.error("No DCU Hero found in database with id: " + id);
             throw new HeroNotFoundException("No DCU Hero found in database with id: " + id);
         }
         return dcuHero.get();
