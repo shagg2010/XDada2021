@@ -8,9 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class RestApplicationTests {
 
-	@Autowired
-	DCUHeroesRepository dcuHeroesRepository;
-
 	@Test
 	void contextLoads() {
 	}
