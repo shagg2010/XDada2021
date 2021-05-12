@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class DCUHeroesService {
+public class DCUHeroesService implements DCUHeroService {
 
     private static final Logger logger = LoggerFactory.getLogger(DCUHeroesService.class);
 
