@@ -46,4 +46,13 @@ public class DCUHeroesService {
         }
         return dcuHero.get();
     }
+
+    public DCUHero getDCUHeroByName(String name) {
+        Optional<DCUHero> dcuHero = dcuHeroesRepository.findHeroByUserName(name);
+        if(!dcuHero.isPresent()){
+            logger.error("No DCU Hero found in database with similar name: " + name);
+            throw new HeroNotFoundException("No DCU Hero found in database with similar name: " + name);
+        }
+        return dcuHero.get();
+    }
 }

@@ -5,9 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface DCUHeroesRepository extends JpaRepository<DCUHero, Long> {
 
-    /*@Query("select heroes from dcu_heroes dcu_heroes where heroname like %?1%")
-    DCUHero findHeroByUserName(String heroName);*/
+    //this is not working
+    @Query(value = "SELECT hero FROM dcu_heroes hero WHERE hero.hero_name like '% ?1 %'", nativeQuery = true)
+    Optional<DCUHero> findHeroByUserName(String heroName);
 }

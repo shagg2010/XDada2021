@@ -11,6 +11,7 @@ public class DCUHero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "hero_name", nullable = false)
     private String heroName;
 
     public DCUHero() {

@@ -27,6 +27,11 @@ public class DCUHeroesController {
         return dcuHeroesService.getDCUHeroById(id);
     }
 
+    @GetMapping("/hero/like")
+    public DCUHero getByHeroNameLike(@RequestParam("name") String name){
+        return dcuHeroesService.getDCUHeroByName(name);
+    }
+
     @PostMapping("/hero")
     @ResponseStatus(value = HttpStatus.CREATED, reason = "Your DCU Hero created successfully...")
     public DCUHero createHero(@RequestBody DCUHero dcuHero) {
