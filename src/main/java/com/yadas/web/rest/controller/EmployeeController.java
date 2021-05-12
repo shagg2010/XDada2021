@@ -1,6 +1,6 @@
 package com.yadas.web.rest.controller;
 
-import com.yadas.web.rest.controller.exceptions.EmployeeNotFoundException;
+import com.yadas.web.rest.exception.EmployeeNotFoundException;
 import com.yadas.web.rest.model.Employee;
 import com.yadas.web.rest.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,10 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employee/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    public String deleteEmployee(@PathVariable Long id) {
+        repository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
         repository.deleteById(id);
+        return "Deleted employee with id: " + id;
     }
 }

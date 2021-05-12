@@ -1,16 +1,19 @@
 package com.yadas.web.rest;
 
+import com.yadas.web.rest.configuration.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @SpringBootApplication
+@EnableConfigurationProperties({FileStorageProperties.class})
 public class RestApplication implements ApplicationRunner {
 
 	@Value("${application.name}")

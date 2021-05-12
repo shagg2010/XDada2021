@@ -1,4 +1,4 @@
-package com.yadas.web.rest.controller.exceptions;
+package com.yadas.web.rest.exception;
 
 import java.util.Date;
 

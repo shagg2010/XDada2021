@@ -1,6 +1,6 @@
 package com.yadas.web.rest.service;
 
-import com.yadas.web.rest.controller.exceptions.HeroNotFoundException;
+import com.yadas.web.rest.exception.HeroNotFoundException;
 import com.yadas.web.rest.model.DCUHero;
 import com.yadas.web.rest.repository.DCUHeroesRepository;
 import org.slf4j.Logger;
