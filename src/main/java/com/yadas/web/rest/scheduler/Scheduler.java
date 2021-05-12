@@ -38,10 +38,15 @@ public class Scheduler {
     @Async
     @Scheduled(fixedRate = 1000)
     public void scheduleFixedRateTaskAsync() throws InterruptedException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        Date now = new Date();
-        String strDate = sdf.format(now);
-        System.out.println("Fixed rate task async:\t" + strDate);
-        Thread.sleep(2000);
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            Date now = new Date();
+            String strDate = sdf.format(now);
+            System.out.println("Fixed rate task async:\t" + strDate);
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException e){
+
+        }
     }
 }
