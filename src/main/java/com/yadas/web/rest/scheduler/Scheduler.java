@@ -30,7 +30,7 @@ public class Scheduler {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         Date now = new Date();
         String strDate = sdf.format(now);
-        System.out.println("Fixed delay task:\t\t" + strDate);
+        //System.out.println("Fixed delay task:\t\t" + strDate);
     }
 
     //The fixedRate property runs the scheduled task at every n millisecond.
@@ -42,7 +42,7 @@ public class Scheduler {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             Date now = new Date();
             String strDate = sdf.format(now);
-            System.out.println("Fixed rate task async:\t" + strDate);
+            //System.out.println("Fixed rate task async:\t" + strDate);
             Thread.sleep(2000);
         }
         catch(InterruptedException e){

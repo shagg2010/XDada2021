@@ -19,9 +19,9 @@ public class PreloadDatabase {
         return args -> {
             log.info("\t\t\tPreloading... " + repository.save(new Employee("Saurabh Yadav", "PTSE")));
             log.info("\t\t\tPreloading... " + repository.save(new Employee("Ashish Solia", "TL")));
-            log.info("\t\t\tPreloading... " + repository.save(new Employee("Chandan Kumar", "TL")));
-            log.info("\t\t\tPreloading... " + repository.save(new Employee("Gisela Rodrigues", "TL")));
-            log.info("\t\t\tPreloading... " + repository.save(new Employee("Reshmi Choudhary", "TL")));
+            //log.info("\t\t\tPreloading... " + repository.save(new Employee("Chandan Kumar", "TL")));
+            //log.info("\t\t\tPreloading... " + repository.save(new Employee("Gisela Rodrigues", "TL")));
+            //log.info("\t\t\tPreloading... " + repository.save(new Employee("Reshmi Choudhary", "TL")));
         };
     }
 
@@ -31,8 +31,8 @@ public class PreloadDatabase {
             log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Superman")));
             log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Wonder Woman")));
             log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Batman")));
-            log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Flash")));
-            log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Aquaman!")));
+            //log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Flash")));
+            //log.info("\t\t\tPreloading DCU Superheroes... " + repository.save(new DCUHero("Aquaman!")));
         };
     }
 }

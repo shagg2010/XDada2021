@@ -1,4 +1,4 @@
-package com.yadas.web.rest.controller.helper;
+package com.yadas.web.rest.service.helper;
 
 public class UploadFileResponse {
 
