@@ -31,6 +31,10 @@ public class KafkaController {
             .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicObject
             .\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
             .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topic1
+                    >msg
+            .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topicObject
+                    > {"message": "message from p1", "hash" : "hash from h1", "producerCode": "producer from p1" }
+                    > {"message": "message from p2", "hash" : "hash from h2", "producerCode": "producer from p2" }
             .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topic1 --from-beginning
             .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topicObject --from-beginning
      */
