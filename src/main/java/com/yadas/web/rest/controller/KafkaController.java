@@ -55,7 +55,7 @@ public class KafkaController {
 
     @PostMapping(path = "/produce/message/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String produceObjectMessageFromJson(@RequestBody KafkaMessage kafkaMessage){
-        LOGGER.info("sending payload='{}' to topic='{}'", kafkaMessage.toString(), topic1);
+        LOGGER.info("sending payload='{}' to topic='{}'", kafkaMessage.toString(), topic2);
         //KafkaMessage kafkaMessageObject = new KafkaMessage(message, hash, producerCode);
         kafkaTemplateObject.send(topic2, kafkaMessage);
         return "Published object messaged successfully : " + kafkaMessage.toString();
