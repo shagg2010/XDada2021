@@ -26,18 +26,10 @@ public class KafkaController {
     private KafkaTemplate<String, KafkaMessage> kafkaTemplateObject;
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaController.class);
 
-    /* Create Kafka Topic and check if it is working correctly-
-            .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic1
-            .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicObject
-            .\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
-            .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topic1
-                    >msg
-            .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topicObject
-                    > {"message": "message from p1", "hash" : "hash from h1", "producerCode": "producer from p1" }
-                    > {"message": "message from p2", "hash" : "hash from h2", "producerCode": "producer from p2" }
-            .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topic1 --from-beginning
-            .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topicObject --from-beginning
+    /*
+        Please refer kafka-readme.txt for commands and docker related details
      */
+
     @PostMapping("/publish/{message}")
     public String produceMessage(@PathVariable("message") final String message){
         LOGGER.info("sending payload='{}' to topic='{}'", message, topic1);
