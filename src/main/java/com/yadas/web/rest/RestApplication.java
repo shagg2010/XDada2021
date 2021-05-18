@@ -30,6 +30,6 @@ public class RestApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments arg0) throws Exception {
-		System.out.println("\n=================================================================================================================================\n" +  "\t\t\t\t\t\t" + this.applicationName + "\tversion: " + this.applicationVersion + "\n=================================================================================================================================\n");
+		System.out.println("\n=================================================================================================================================\n" +  "\t\t\t\t\t\t\t\t\t" + this.applicationName + "\tversion: " + this.applicationVersion + "\n=================================================================================================================================\n");
 	}
 }
