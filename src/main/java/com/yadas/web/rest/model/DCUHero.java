@@ -17,6 +17,11 @@ public class DCUHero {
     public DCUHero() {
     }
 
+    public DCUHero(long id, String heroName) {
+        this.id = id;
+        this.heroName = heroName;
+    }
+
     public DCUHero(String heroName) {
         this.heroName = heroName;
     }
