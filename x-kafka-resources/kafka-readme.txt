@@ -3,9 +3,14 @@
 ===================================================================================
 Install and Create Kafka Topic locally on Windows and check if it is working correctly-
 
-    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic1
-    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicObject
+    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic topic1
+    .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic topicObject
     .\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
+
+    .\bin\windows\zookeeper-shell.bat localhost:2181 ls /brokers/ids
+    .\bin\windows\zookeeper-shell.bat localhost:2181 rmr /brokers/topics/topic10
+    .\bin\windows\kafka-topics.bat --describe --zookeeper localhost:2181 --topic topic1
+
     .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topic1
             >msg
     .\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic topicObject
@@ -21,8 +26,8 @@ Install and Create Kafka Topic locally on Windows and check if it is working cor
 Kafka Running On Docker Image (Using exec /bin/bash)
 ----------------------------------------------------
 These clients, from other containers on the same Docker network, will use the kafka container service hostname to connect to Kafka.
-./opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list kafka:9093 --topic topic1
-./opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list kafka:9093 --topic topicObject
+./opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list kafka:9092 --topic topic1
+./opt/bitnami/kafka/bin/kafka-console-producer.sh --broker-list kafka:9092 --topic topicObject
 
 ./opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic topic1 --from-beginning
 ./opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic topicObject --from-beginning

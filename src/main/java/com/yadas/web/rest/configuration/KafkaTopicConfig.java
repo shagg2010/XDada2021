@@ -23,8 +23,8 @@ public class KafkaTopicConfig {
     @Value("${kafka.bootstrap.topic2.name}")
     private String topicObject;
 
-    private int numberOfPartitions = 1;
-    private short replicationFactor = (short) 1;
+    private int numberOfPartitions = 3;
+    private short replicationFactor = (short) 3;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
