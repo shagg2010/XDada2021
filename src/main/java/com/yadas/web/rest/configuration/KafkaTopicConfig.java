@@ -4,6 +4,7 @@ import org.apache.kafka.clients.admin.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
 
 import java.util.HashMap;
@@ -35,12 +36,18 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic topic1() {
-        return topicExists(topic1)?null:new NewTopic(topic1, numberOfPartitions, replicationFactor);
+        return topicExists(topic1)?null: TopicBuilder.name(topic1)
+                .partitions(numberOfPartitions)
+                .replicas(replicationFactor)
+                .build();
     }
 
     @Bean
     public NewTopic topicObject() {
-        return topicExists(topicObject)?null:new NewTopic(topicObject, numberOfPartitions, replicationFactor);
+        return topicExists(topicObject)?null:TopicBuilder.name(topicObject)
+                .partitions(numberOfPartitions)
+                .replicas(replicationFactor)
+                .build();
     }
 
     public boolean topicExists(String topicName){
