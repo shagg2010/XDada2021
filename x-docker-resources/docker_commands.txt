@@ -1,0 +1,11 @@
+---------------
+Common Commands
+---------------
+docker ps -a (List all containers running)
+
+docker image ls (Lists all images in the docker)
+
+----------------------------------------------------------------
+Docker - Login to Linux Shell withing Container and Run commands
+----------------------------------------------------------------
+docker exec -it <container name> /bin/bash

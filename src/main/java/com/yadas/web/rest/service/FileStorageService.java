@@ -3,6 +3,8 @@ package com.yadas.web.rest.service;
 import com.yadas.web.rest.configuration.FileStorageProperties;
 import com.yadas.web.rest.exception.FileStorageException;
 import com.yadas.web.rest.exception.MyFileNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,12 +23,14 @@ public class FileStorageService {
 
     private final Path fileStorageLocation;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileStorageService.class);
+
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
 
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDirectory())
                 .toAbsolutePath().normalize();
-
+        LOGGER.info("[LOG] file absolute path='"+ fileStorageLocation.toAbsolutePath() +"' of successfully!");
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {

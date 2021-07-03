@@ -1,0 +1,10 @@
+-----------------------------------------------------------
+Docker Compose to start the containers using the Dockerfile
+-----------------------------------------------------------
+docker-compose up
+docker-compose up --build
+
+-----------------------------------------------------------
+Docker Compose to stop the containers using the Dockerfile
+-----------------------------------------------------------
+docker-compose down
