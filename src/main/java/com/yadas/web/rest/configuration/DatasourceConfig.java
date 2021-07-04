@@ -10,16 +10,25 @@ import javax.sql.DataSource;
 @Configuration
 public class DatasourceConfig {
 
-    @Value("${app.database.url}")
+    @Value("${application.database.url}")
     private String databaseURL;
+
+    @Value("${application.database.user}")
+    private String databaseUser;
+
+    @Value("${application.database.password}")
+    private String databasePassword;
+
+    @Value("${application.database.driver}")
+    private String databaseDriver;
 
     @Bean
     public DataSource datasource() {
         return DataSourceBuilder.create()
-                .driverClassName("org.postgresql.Driver")
-                .url(databaseURL)
-                .username("yadas")
-                .password("yadas")
+                .driverClassName(this.databaseDriver)
+                .url(this.databaseURL)
+                .username(this.databaseUser)
+                .password(this.databasePassword)
                 .build();
     }
 }
