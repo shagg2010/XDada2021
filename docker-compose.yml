@@ -1,5 +1,9 @@
 version: "3"
 
+networks:
+  appNetwork:
+    driver: bridge
+
 services:
 
   xpressdb:
@@ -11,6 +15,8 @@ services:
       POSTGRES_DB: xpress
       POSTGRES_USER: yadas
       POSTGRES_PASSWORD: yadas
+    networks:
+      - appNetwork
 
   springbootapp:
     container_name: springboot-postgres-yadas
@@ -21,6 +27,8 @@ services:
       - zookeeper
     ports:
       - 8080:8080
+    networks:
+      - appNetwork
 
   zookeeper:
     image: "bitnami/zookeeper:3.7.0"
@@ -31,6 +39,8 @@ services:
       - 2181:2181
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - appNetwork
 
   kafka1:
     image: "bitnami/kafka:2.8.0"
@@ -49,6 +59,8 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+    networks:
+      - appNetwork
 
   kafka2:
     image: "bitnami/kafka:2.8.0"
@@ -67,6 +79,8 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+    networks:
+      - appNetwork
 
   kafka3:
     image: "bitnami/kafka:2.8.0"
@@ -85,3 +99,5 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+    networks:
+      - appNetwork

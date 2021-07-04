@@ -1,10 +1,8 @@
------------------------------------------------------------
-Docker Compose to start the containers using the Dockerfile
------------------------------------------------------------
-docker-compose up
-docker-compose up --build
+1) Docker Compose to start the containers using the Dockerfile
+    docker-compose up
+    docker-compose up --build
+    docker-compose up --build --remove-orphans
 
------------------------------------------------------------
-Docker Compose to stop the containers using the Dockerfile
------------------------------------------------------------
-docker-compose down
+
+2) Docker Compose to stop the containers using the Dockerfile
+    docker-compose down
