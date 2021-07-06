@@ -25,10 +25,14 @@ services:
     depends_on:
       - xpressdb
       - zookeeper
+      - cassandra
     ports:
       - 8080:8080
     networks:
       - appNetwork
+    command: sh -c '/usr/src/app/wait-for-it.sh localhost:9042 --timeout=100 -- /usr/src/app/start-application.sh'
+    #explicitly setting wrong hostname localhost:9042 instead of cassandra:9042 just to wait for 150 seconds
+    #not using --strict option otherwise app will not start at all
 
   zookeeper:
     image: "bitnami/zookeeper:3.7.0"
@@ -99,5 +103,18 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+    networks:
+      - appNetwork
+
+  cassandra:
+    image: 'cassandra:3.11.10'
+    container_name: apache_cassandra3
+    hostname: cassandra
+    depends_on:
+      - xpressdb
+    ports:
+      - 9042:9042
+      - 7000:7000
+      - 7199:7199
     networks:
       - appNetwork

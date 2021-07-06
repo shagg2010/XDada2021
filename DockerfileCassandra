@@ -1,0 +1,9 @@
+FROM cassandra:3.11.10
+RUN apt-get -q update && apt-get -qy install netcat
+USER cassandra
+COPY resources/preload-cassandra.sh /tmp/
+COPY resources/cassandra/*.cql /tmp/
+COPY resources/wait-for-it.sh /tmp/
+COPY resources/entrypoint-wrap.sh /tmp/entrypoint-wrap.sh
+ENTRYPOINT ["/tmp/entrypoint-wrap.sh"]
+CMD ["cassandra", "-f"]

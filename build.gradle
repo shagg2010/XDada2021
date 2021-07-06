@@ -20,6 +20,8 @@ dependencies {
 	implementation 'org.apache.kafka:kafka-streams'
 	implementation 'org.springframework.kafka:spring-kafka'
 	implementation 'org.mockito:mockito-core:2.13.0'
+	implementation 'com.datastax.cassandra:cassandra-driver-core:3.1.0'
+	implementation 'org.springframework.data:spring-data-cassandra:3.2.2'
     runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'

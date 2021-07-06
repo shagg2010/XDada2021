@@ -8,5 +8,13 @@
 3) Docker - list all networks
     docker network ls
 
-4) docker - display logs
+4) Docker - display logs
     docker logs <container-id>
+
+5) Docker - remove container
+    docker rm <container-id>
+    docker rm $(docker ps --filter status=exited -q)        [To remove all exited containers]
+
+6) Docker - copy files to running container
+    docker cp file.txt <container-id>:/usr/src/app/file.txt
+        [example: docker cp preload-cassandra-1.3.jar 503686931b18:/usr/src/app/preload-cassandra-1.3.jar]
