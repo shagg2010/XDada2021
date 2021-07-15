@@ -30,7 +30,7 @@ services:
       - 8080:8080
     networks:
       - appNetwork
-    command: sh -c '/usr/src/app/wait-for-it.sh localhost:9042 --timeout=100 -- /usr/src/app/start-application.sh'
+    command: sh -c 'bash /usr/src/app/wait-for-it.sh localhost:9042 --timeout=75 -- /usr/src/app/start-application.sh'
     #explicitly setting wrong hostname localhost:9042 instead of cassandra:9042 just to wait for 150 seconds
     #not using --strict option otherwise app will not start at all
 
