@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.mockito:mockito-core:2.13.0'
 	implementation 'com.datastax.cassandra:cassandra-driver-core:3.1.0'
 	implementation 'org.springframework.data:spring-data-cassandra:3.2.2'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas:2.1.4.RELEASE'
     runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
