@@ -1,0 +1,120 @@
+version: "3"
+
+networks:
+  appNetwork:
+    driver: bridge
+
+services:
+
+  xpressdb:
+    image: "postgres:13"
+    container_name: postgres-xpressdb-yadas
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: xpress
+      POSTGRES_USER: yadas
+      POSTGRES_PASSWORD: yadas
+    networks:
+      - appNetwork
+
+  springbootapp:
+    container_name: springboot-postgres-yadas
+    image: springboot-postgres-yadas
+    build: ./
+    depends_on:
+      - xpressdb
+      - zookeeper
+      - cassandra
+    ports:
+      - 8080:8080
+    networks:
+      - appNetwork
+    command: sh -c 'bash /usr/src/app/wait-for-it.sh localhost:9042 --timeout=75 -- /usr/src/app/start-application.sh'
+    #explicitly setting wrong hostname localhost:9042 instead of cassandra:9042 just to wait for 150 seconds
+    #not using --strict option otherwise app will not start at all
+
+  zookeeper:
+    image: "bitnami/zookeeper:3.7.0"
+    restart: always
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - appNetwork
+
+  kafka1:
+    image: "bitnami/kafka:2.8.0"
+    container_name: kafka1
+    hostname: kafka1
+    ports:
+      - 9092:9092
+      - 9093:9093
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka1:9092,EXTERNAL://localhost:9093
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+    networks:
+      - appNetwork
+
+  kafka2:
+    image: "bitnami/kafka:2.8.0"
+    container_name: kafka2
+    hostname: kafka2
+    ports:
+      - 9094:9094
+      - 9095:9095
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9094,EXTERNAL://:9095
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka2:9094,EXTERNAL://localhost:9095
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+    networks:
+      - appNetwork
+
+  kafka3:
+    image: "bitnami/kafka:2.8.0"
+    container_name: kafka3
+    hostname: kafka3
+    ports:
+      - 9096:9096
+      - 9097:9097
+    environment:
+      - KAFKA_BROKER_ID=3
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9096,EXTERNAL://:9097
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka3:9096,EXTERNAL://localhost:9097
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+    networks:
+      - appNetwork
+
+  cassandra:
+    image: 'cassandra:3.11.10'
+    container_name: apache_cassandra3
+    hostname: cassandra
+    depends_on:
+      - xpressdb
+    ports:
+      - 9042:9042
+      - 7000:7000
+      - 7199:7199
+    networks:
+      - appNetwork

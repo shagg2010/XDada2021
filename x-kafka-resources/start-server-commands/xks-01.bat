@@ -1,0 +1,1 @@
+call .\bin\windows\kafka-server-start.bat .\config\server1.properties

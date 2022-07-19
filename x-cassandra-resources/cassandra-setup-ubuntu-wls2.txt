@@ -1,0 +1,62 @@
+1) Install Java and Python
+    [For Java]
+        sudo apt-get update
+        sudo apt-get install openjdk-8-jdk
+        java -version
+    [For Python 2.x - We will use Python 2.7.18]
+        sudo apt install python2
+        python2 -V
+    [For Python 3]
+        sudo apt update
+        sudo apt install software-properties-common
+        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo apt update
+        sudo apt install python3.6
+        python3 --version       [NOTE: it is not python but python3]
+
+2) Install Cassandra
+    [For Cassandra 3x]
+        echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+        curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+        curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+        sudo apt-get update
+    [For Cassandra 4x]
+        echo "deb http://downloads.apache.org/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+        curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+        sudo apt-get update
+        sudo apt-get install cassandra
+
+3) Start Cassandra
+    sudo service cassandra start
+        [ A new Linux user cassandra will get created as part of the installation. The Cassandra service will also be run as this user.]
+    tail -f /var/log/cassandra/system.log
+        [Cassandra is ready when you see an entry like this in the system.log: ]
+        [INFO  [main] 2019-12-17 03:03:37,526 Server.java:156 - Starting listening for CQL clients on localhost/127.0.0.1:9042 (unencrypted)...]
+
+4) Stop Cassandra
+    sudo service cassandra stop
+
+5) Check Health of Cassandra Cluster
+    nodetool status (from Ubuntu bash prompt)
+
+6) Open CQLSH Prompt
+    cqlsh
+
+7) Remove Cassandra
+    sudo apt-get remove cassandra
+    sudo rm -rf /var/lib/cassandra ; rm -rf /var/log/cassandra ; sudo rm -rf /etc/cassandra
+------
+Links:
+------
+https://www.youtube.com/watch?v=pGhkX5z_vW8&ab_channel=jumpstartCS
+https://cassandra.apache.org/doc/latest/getting_started/installing.html#installing-the-debian-packages
+https://cassandra.apache.org/quickstart/
+
+Drivers for Cassandra 3 in Springboot
+implementation 'com.datastax.cassandra:cassandra-driver-core:3.1.0'
+Not sure if this is required
+implementation 'org.cassandraunit:cassandra-unit:3.0.0.1'
+
+Drivers for Cassandra 4 in Springboot
+implementation 'com.datastax.oss:java-driver-core:4.1.0'
+implementation 'com.datastax.oss:java-driver-query-builder:4.1.0'
